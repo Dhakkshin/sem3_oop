@@ -38,5 +38,20 @@ class StackTest implements Stack {
     public boolean isEmpty() {
         return top == -1;
     }
-}
 
+    public static void main(String[] args) {
+        StackTest myStack = new StackTest();
+
+        // Pushing elements onto the stack
+        myStack.push(10);
+        myStack.push(20);
+        myStack.push(30);
+
+        // Popping elements from the stack
+        System.out.println("Popped element: " + myStack.pop());
+        System.out.println("Popped element: " + myStack.pop());
+
+        // Checking if the stack is empty
+        System.out.println("Is the stack empty? " + myStack.isEmpty());
+    }
+}
