@@ -1,5 +1,4 @@
 package project;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -7,42 +6,47 @@ import java.awt.event.*;
 public class trial2 {
     public static void main(String[] args) {
         JFrame f = new JFrame("YouDo");
-        f.setVisible(true);
-        f.setSize(800,400);
+        f.setSize(800, 400);
+        f.setLayout(new BorderLayout()); // Use BorderLayout for the main JFrame
 
-        f.setLayout(new FlowLayout());
+        // Panel 1 - Welcome Message
+        JPanel welcomePanel = new JPanel(new FlowLayout());
+        JLabel welcomeLabel = new JLabel("Welcome to YouDo! \n");
+        JLabel instructionLabel = new JLabel("Here, you have to do!!");
+        welcomePanel.add(welcomeLabel);
+        welcomePanel.add(instructionLabel);
 
-        JPanel p = new JPanel(new GridLayout(2,1));
-        // p.setBorder(BorderFactory.createLineBorder(Color.black));
-        JLabel l1 =  new JLabel("Welcome to YouDo! ");
-        p.add(l1);
-        JLabel l2 = new JLabel("Here, you have to do!!");
-        p.add(l2);
+        // Panel 2 - Task Input
+        JPanel taskInputPanel = new JPanel(new GridLayout(2, 2));
+        JLabel taskLabel = new JLabel("Enter your task here:");
+        JTextField taskField = new JTextField(20);
+        JLabel priorityLabel = new JLabel("Enter Priority:");
+        JTextField priorityField = new JTextField( 20);
+        taskInputPanel.add(taskLabel);
+        taskInputPanel.add(taskField);
+        taskInputPanel.add(priorityLabel);
+        taskInputPanel.add(priorityField);
 
-        JPanel p2 = new JPanel(new GridLayout(2,2));
-        // p2.setBorder(BorderFactory.createLineBorder(Color.black));
-        JLabel l3 = new JLabel("Enter your task here:");
-        p2.add(l3);
-        JTextField t1 = new JTextField("Enter your task here", 20);
-        p2.add(t1);
-        JLabel l4 = new JLabel("Enter Priority:");
-        p2.add(l4);
-        JTextField t2 = new JTextField("Enter Priority", 20);
-        p2.add(t2);
-
-        JTextArea testArea = new JTextArea("Enter your task here", 5, 20);
-        JButton b = new JButton("Submit");
-        b.addActionListener(new ActionListener() {
+        // Panel 3 - Display Area and Submit Button
+        JPanel displayPanel = new JPanel(new BorderLayout());
+        JTextArea textArea = new JTextArea("Enter your task here", 5, 20);
+        JButton submitButton = new JButton("Submit");
+        submitButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String task = t1.getText();
-                String priority = t2.getText();
-                testArea.setText(task + " " + priority);
+                String task = taskField.getText();
+                String priority = priorityField.getText();
+                textArea.setText(task + " " + priority);
             }
         });
+        displayPanel.add(textArea, BorderLayout.CENTER);
+        displayPanel.add(submitButton, BorderLayout.SOUTH);
 
-        f.add(p);
-        f.add(p2);
-        f.add(testArea);
-        f.add(b);
+        // Add panels to the main frame
+        f.add(welcomePanel, BorderLayout.NORTH);
+        f.add(taskInputPanel, BorderLayout.CENTER);
+        f.add(displayPanel, BorderLayout.SOUTH);
+
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setVisible(true);
     }
 }
